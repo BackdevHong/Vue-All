@@ -41,4 +41,3 @@
     price: 370000
 }];
 
-export default;

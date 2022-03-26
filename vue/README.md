@@ -1,24 +1,12 @@
-# noticeboard
+# Vue
 
-## Project setup
-```
-npm install
-```
+## 배워야 할 것
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+-   [] 뷰 기초
+-   [] 뷰와 DB의 연동
+-   [] 뷰 심화
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 앞으로 할 것
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+-   [] 뷰를 이용한 게시판 제작
+-   [] 뷰를 이용한 ??? 프로젝트 ( 아직 미정 )
