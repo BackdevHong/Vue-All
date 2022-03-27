@@ -3,27 +3,30 @@
         <div class="black-bg" v-if="model == 1" @click="model = 0">
             <div class="white-bg">
                 <h4>역삼동원룸</h4>
-                <p>작성자 : 홍인성</p>
             </div>
         </div>
+
         <div class="menu">
             <a v-for="(atag, i) in 메뉴들" :key="i">{{ atag }}</a>
         </div>
-        <div v-for="(a, i) in products" :key="i">
-            <img class="room-img" :src="image[i]" />
-            <h4 @click="model = 1">{{ a }}</h4>
-            <p>60만원</p>
-            <button @click="report[i] += 1">허위 매물 신고</button> <span>신고수 : {{ report[i] }}</span>
+
+        <div v-for="(a, i) in oneRoomData" :key="i">
+            <img class="room-img" :src="oneRoomData[i].image" />
+            <h4 @click="(model = 1), (id = i)">{{ oneRoomData[i].title }}</h4>
+            <p>{{ oneRoomData[i].price }}원</p>
         </div>
     </div>
 </template>
 
 <script>
+import Data from './assets/Data.js';
 export default {
     name: 'App',
     data() {
         return {
             model: 0,
+            id: 0,
+            oneRoomData: Data,
             메뉴들: ['Home', 'Shop', 'About'],
             products: ['역삼동원룸', '천호동원룸', '마포구원룸'],
             price: ['60', '100', '150'],
