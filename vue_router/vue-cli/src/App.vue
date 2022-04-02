@@ -6,23 +6,7 @@
     <router-view />
 </template>
 
-<script>
-import axios from "axios";
-export default {
-    methods: {
-        getData: function () {
-            axios
-                .get("https://jsonplaceholder.typicode.com/users/")
-                .then(function (responce) {
-                    console.log(responce);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-    },
-};
-</script>
+
 
 <style>
 #app {
