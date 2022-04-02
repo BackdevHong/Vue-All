@@ -18,11 +18,12 @@
             <div v-show="loading">
                 Loading
             </div>
-            <input type="text" name="" id="">
-            <p></p>
+            <input type="text" v-model="message">
+            <p>{{message}}</p>
             <!-- <p id="abc1234">{{ doubleNum }}</p> -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
         <script>    
+            Vue.config.devtools = true;
             new Vue({
                 el: "#app",
                 data: {
@@ -30,7 +31,8 @@
                     num: 1000,
                     uuid: 'eee1234',
                     name: 'text-blue',
-                    loading: false
+                    loading: false,
+                    message: ''
                 },
                 computed:{
                     doubleNum : function(){
