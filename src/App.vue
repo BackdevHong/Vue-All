@@ -28,7 +28,20 @@
         </ul>
     </header>
     <main>
-        <div></div>
+        <div>
+            <div class="main">
+                <div class="sub">
+                    <input
+                        type="text"
+                        class="addItem"
+                        placeholder="추가하고 싶은 Todo를 입력하세요. 엔터키를 누르면 추가됩니다."
+                        v-bind:propsdata="todoItems"
+                    />
+                    <font-awesome-icon icon="fa-solid fa-turn-down-left" />
+                    <hr />
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
@@ -37,6 +50,7 @@ export default {
     data() {
         return {
             CreditOn: false,
+            todoItems: [],
         };
     },
     methods: {
@@ -46,12 +60,22 @@ export default {
         Active() {
             this.CreditOn = false;
         },
+        // addItem(){
+        //     var value = {
+        //         item : todoItem
+        //     }
+        // }
     },
+    // created(){
+    //     if ()
+    // }
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
+
 * {
     margin: 0;
     font-family: "Ubuntu", sans-serif;
@@ -127,5 +151,36 @@ main {
 .modal .box .header i {
     cursor: pointer;
     user-select: none;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #964b00;
+}
+
+.sub {
+    background-color: #fff4a2;
+    width: 95%;
+    height: 95vh;
+    margin-top: 20px;
+}
+
+.sub hr {
+    width: 95%;
+    background-color: black;
+    height: 3px;
+}
+
+.addItem {
+    font-family: "Song Myung";
+    width: 95%;
+    height: 40px;
+    background: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
 }
 </style>
