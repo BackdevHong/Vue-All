@@ -7,16 +7,8 @@
                 <i class="fa-solid fa-xmark" @click="Active"></i>
             </div>
             <div>
-                <p>
-                    홍인성 : 안녕하세요! 해당 프로젝트에 총괄역을 맡고있습니다.
-                    전반적인 시스템과 TodoList부분에 디자인 부분을 맡았습니다.
-                    앞으로 더 많은 프로젝트에 만나뵙겠습니다.
-                </p>
-                <p>
-                    이민준 : 안녕하세요! 해당 프로젝트에서 메뉴와 Credit창에
-                    디자인을 맡았습니다. ( 사실 실질적인 개발자는 접니ㄷ )
-                    앞으로도 잘 부탁드리겠습니다.
-                </p>
+                <p>홍인성 : 안녕하세요! 해당 프로젝트에 총괄역을 맡고있습니다. 전반적인 시스템과 TodoList부분에 디자인 부분을 맡았습니다. 앞으로 더 많은 프로젝트에 만나뵙겠습니다.</p>
+                <p>이민준 : 안녕하세요! 해당 프로젝트에서 메뉴와 Credit창에 디자인을 맡았습니다. ( 사실 실질적인 개발자는 접니ㄷ ) 앞으로도 잘 부탁드리겠습니다.</p>
             </div>
         </div>
     </div>
@@ -31,14 +23,14 @@
         <div>
             <div class="main">
                 <div class="sub">
-                    <input
-                        type="text"
-                        class="addItem"
-                        placeholder="추가하고 싶은 Todo를 입력하세요. 엔터키를 누르면 추가됩니다."
-                        v-bind:propsdata="todoItems"
-                    />
-                    <font-awesome-icon icon="fa-solid fa-turn-down-left" />
+                    <input type="text" class="addItem" placeholder="추가하고 싶은 Todo를 입력하세요. 엔터키를 누르면 추가됩니다." v-model="newTodoItem" v-on:keyup.enter="addItem" />
                     <hr />
+                    <div class="items">
+                        <ul v-for="items in todoItems" v-bind:key="items">
+                            <li>{{ items }}</li>
+                            <hr />
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +42,9 @@ export default {
     data() {
         return {
             CreditOn: false,
+            newTodoItem: '',
             todoItems: [],
+            items: [],
         };
     },
     methods: {
@@ -60,25 +54,35 @@ export default {
         Active() {
             this.CreditOn = false;
         },
-        // addItem(){
-        //     var value = {
-        //         item : todoItem
-        //     }
-        // }
+        addItem() {
+            if (this.newTodoItem != '') {
+                var obj = {
+                    complete: false,
+                    item: this.newTodoItem,
+                };
+                localStorage.setItem(obj.item, JSON.stringify(obj));
+                this.items.push(obj);
+                this.newTodoItem = '';
+            }
+        },
     },
-    // created(){
-    //     if ()
-    // }
+    created: function () {
+        if (localStorage.length > 0) {
+            for (var i = 0; i < localStorage.length; i++) {
+                this.items.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+            }
+        }
+    },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
 
 * {
     margin: 0;
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 header {
@@ -175,7 +179,7 @@ main {
 }
 
 .addItem {
-    font-family: "Song Myung";
+    font-family: 'Song Myung';
     width: 95%;
     height: 40px;
     background: none;
