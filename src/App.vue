@@ -30,24 +30,26 @@
     <main>
         <div>
             <div class="main">
-                <img src="./assets/label.png" alt="" class="first" />
                 <div class="sub">
-                    <div class="container">
-                        <input
-                            type="text"
-                            class="addItem"
-                            v-model="newTodoItem"
-                            v-on:keyup.enter="addItem"
-                        />
-                    </div>
-
+                    <p class="dis">추가하고 싶은 Todo를 입력해주세요!</p>
+                    <input
+                        type="text"
+                        class="addItem"
+                        v-model="newTodoItem"
+                        v-on:keyup.enter="addItem"
+                        v-on:input="length(newTodoItem)"
+                        maxlength="20"
+                    />
+                    <span :style="{ color: pluscolor }">{{
+                        newTodoItem.length
+                    }}</span>
+                    / 20
                     <div class="items">
                         <ul
                             v-for="(todoItems, index) in items"
                             v-bind:key="todoItems"
                         >
                             <li>{{ items[index].item }}</li>
-                            <hr />
                         </ul>
                     </div>
                 </div>
@@ -64,6 +66,7 @@ export default {
             newTodoItem: "",
             todoItems: [],
             items: [],
+            pluscolor: "",
         };
     },
     methods: {
@@ -84,6 +87,13 @@ export default {
                 this.newTodoItem = "";
             }
         },
+        length(a) {
+            if (a.length <= 20) {
+                this.pluscolor = "black";
+            } else {
+                this.pluscolor = "red";
+            }
+        },
     },
     created: function () {
         if (localStorage.length > 0) {
@@ -99,8 +109,8 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap");
 
 * {
     margin: 0;
@@ -149,7 +159,7 @@ ul.menu li:hover {
     color: #00ffd5cf;
 }
 
-main {
+.main {
     padding: 13px 20%;
 }
 
@@ -176,17 +186,31 @@ main {
     font-size: 32px;
 }
 
+.dis {
+    user-select: none;
+    font-size: 10px;
+    font-family: "IBM Plex Sans KR", sans-serif;
+    color: rgba(0, 0, 0, 60%);
+}
+
+.addItem {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 17%);
+}
+
+.addItem:focus {
+    outline-style: none;
+}
+
 .modal .box .header i {
     cursor: pointer;
     user-select: none;
 }
-
-.addItem {
-    border: 1px solid rgba(0, 0, 0, 12%);
-}
 .items ul li {
-    font-family: "Noto Serif KR", serif;
-    font-size: 22px;
+    border: 1px solid rgba(0, 0, 0, 30%);
+    font-size: 20px;
+    margin-top: 3px;
+    padding: 10px;
 }
 
 .items ul hr {
