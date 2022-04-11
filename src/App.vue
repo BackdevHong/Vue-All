@@ -14,8 +14,7 @@
                 </p>
                 <p>
                     이민준 : 안녕하세요! 해당 프로젝트에서 메뉴와 Credit창에
-                    디자인을 맡았습니다. ( 사실 실질적인 개발자는 접니ㄷ )
-                    앞으로도 잘 부탁드리겠습니다.
+                    디자인을 맡았습니다.
                 </p>
             </div>
         </div>
@@ -65,7 +64,11 @@
                                 v-bind:class="{
                                     checkCom: items[index].complete,
                                 }"
-                                @click="test(items[index])"
+                                @click="checkItem(items[index])"
+                            ></i>
+                            <i
+                                class="fa-solid fa-trash removeItem"
+                                @click="removeItem(items[index].item, index)"
                             ></i>
                         </li>
                     </ul>
@@ -112,11 +115,16 @@ export default {
                 this.color = "red";
             }
         },
-        test(i) {
+        checkItem(i) {
             i.complete = !i.complete;
             localStorage.removeItem(i.item);
             localStorage.setItem(i.item, JSON.stringify(i));
             console.log(i.complete);
+        },
+        removeItem(i, index) {
+            localStorage.removeItem(i);
+            this.items.splice(index, 1);
+            console.log(this.todoItems);
         },
     },
     created: function () {
@@ -285,5 +293,12 @@ ul.menu li:hover {
     width: 15%;
     text-decoration: line-through;
     color: lightgray;
+}
+
+.removeItem {
+    float: right;
+    margin-right: 10px;
+    line-height: 30px;
+    user-select: none;
 }
 </style>
