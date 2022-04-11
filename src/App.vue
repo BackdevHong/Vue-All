@@ -34,7 +34,7 @@
                 <p class="width">
                     <input
                         type="text"
-                        :value="items[editIndex].item"
+                        maxlength="30"
                         class="editValue"
                         @input="EditItem = $event.target.value"
                     />
@@ -61,7 +61,7 @@
                         type="text"
                         class="addItem"
                         v-model="newTodoItem"
-                        v-on:keyup.enter="addItem"
+                        v-on:keyup.enter="addTodo"
                         v-on:input="length(newTodoItem)"
                         maxlength="30"
                     />
@@ -70,18 +70,18 @@
                         <span class="font"> / 30</span>
                     </div>
                 </div>
-                <div class="items">
+                <transition-group name="items" tag="div" class="items">
                     <ul
-                        v-for="(todoItems, index) in items"
+                        v-for="(todoItems, index) in $store.state.todoItems"
                         v-bind:key="todoItems"
                     >
                         <li>
                             <span
                                 v-bind:class="{
-                                    textComplete: items[index].complete,
+                                    textComplete: todoItems.complete,
                                 }"
                             >
-                                &nbsp;{{ items[index].item }}</span
+                                &nbsp;{{ todoItems.item }}</span
                             >
                             <i
                                 class="fa-solid fa-pen editItem"
@@ -90,17 +90,17 @@
                             <i
                                 class="fa-solid fa-check checkbox"
                                 v-bind:class="{
-                                    checkCom: items[index].complete,
+                                    checkCom: todoItems.complete,
                                 }"
-                                @click="checkItem(items[index])"
+                                @click="checkItem(todoItems)"
                             ></i>
                             <i
                                 class="fa-solid fa-trash removeItem"
-                                @click="removeItem(items[index].item, index)"
+                                @click="removeItem(todoItems, index)"
                             ></i>
                         </li>
                     </ul>
-                </div>
+                </transition-group>
             </div>
         </div>
     </main>
@@ -125,6 +125,9 @@ export default {
         Credit() {
             this.CreditOn = true;
         },
+        Active() {
+            this.CreditOn = false;
+        },
         EditModeOn(index) {
             console.log(index);
             this.EditMode = true;
@@ -132,28 +135,14 @@ export default {
         },
         EditExit() {
             this.EditMode = false;
-            localStorage.removeItem(this.items[this.editIndex].item);
+            localStorage.removeItem(this.todoItems);
             this.items.splice(this.editIndex, 1);
-            var obj = {
+            const obj = {
                 complete: false,
                 item: this.EditItem,
             };
             localStorage.setItem(obj.item, JSON.stringify(obj));
             this.items.push(obj);
-        },
-        Active() {
-            this.CreditOn = false;
-        },
-        addItem() {
-            if (this.newTodoItem != "") {
-                var obj = {
-                    complete: false,
-                    item: this.newTodoItem,
-                };
-                localStorage.setItem(obj.item, JSON.stringify(obj));
-                this.items.push(obj);
-                this.newTodoItem = "";
-            }
         },
         length(a) {
             if (a.length <= 29) {
@@ -162,25 +151,20 @@ export default {
                 this.color = "red";
             }
         },
+        addTodo() {
+            if (this.newTodoItem !== "") {
+                this.$store.commit("addItem", this.newTodoItem);
+                this.newTodoItem = "";
+            }
+        },
         checkItem(i) {
             i.complete = !i.complete;
             localStorage.removeItem(i.item);
             localStorage.setItem(i.item, JSON.stringify(i));
         },
-        removeItem(i, index) {
-            localStorage.removeItem(i);
-            this.items.splice(index, 1);
-            console.log(this.todoItems);
+        removeTodo(todoItem, index) {
+            this.$store.commit("removeItem", todoItem, index);
         },
-    },
-    created: function () {
-        if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
-                this.items.push(
-                    JSON.parse(localStorage.getItem(localStorage.key(i)))
-                );
-            }
-        }
     },
 };
 </script>
@@ -305,6 +289,17 @@ ul.menu li:hover {
     width: 100%;
 }
 
+.items-enter-active,
+.items-leave-active {
+    transition: all 1s;
+}
+
+.items-enter-from,
+.items-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
 .length {
     user-select: none;
     font-family: "Dongle", sans-serif;
@@ -378,4 +373,6 @@ ul.menu li:hover {
 .width {
     width: 90%;
 }
+
+/* 리스트 아이템 트렌지션 효과 */
 </style>
