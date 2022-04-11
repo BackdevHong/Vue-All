@@ -19,7 +19,30 @@
             </div>
         </div>
     </div>
-
+    <!-- 수정 -->
+    <div class="modal" v-if="EditMode == true">
+        <div class="box">
+            <div class="header">
+                <h1>수정</h1>
+            </div>
+            <div>
+                <p>
+                    수정할 사항을 아래 적어주세요!<br />
+                    수정 사항을 수정하셨다면 적용 버튼을눌러주세요!
+                </p>
+                &nbsp;
+                <p class="width">
+                    <input
+                        type="text"
+                        :value="items[editIndex].item"
+                        class="editValue"
+                        @input="EditItem = $event.target.value"
+                    />
+                </p>
+                <span class="Grant" @click="EditExit"> 적용 </span>
+            </div>
+        </div>
+    </div>
     <header>
         <p>TODO LIST</p>
         <ul class="menu">
@@ -57,8 +80,13 @@
                                 v-bind:class="{
                                     textComplete: items[index].complete,
                                 }"
-                                >{{ items[index].item }}</span
                             >
+                                &nbsp;{{ items[index].item }}</span
+                            >
+                            <i
+                                class="fa-solid fa-pen editItem"
+                                @click="EditModeOn(index)"
+                            ></i>
                             <i
                                 class="fa-solid fa-check checkbox"
                                 v-bind:class="{
@@ -83,16 +111,35 @@ export default {
     data() {
         return {
             CreditOn: false,
+            EditMode: false,
             newTodoItem: "",
             todoItems: [],
             items: [],
             color: "blue",
             checked: [],
+            editIndex: "",
+            EditItem: "",
         };
     },
     methods: {
         Credit() {
             this.CreditOn = true;
+        },
+        EditModeOn(index) {
+            console.log(index);
+            this.EditMode = true;
+            this.editIndex = index;
+        },
+        EditExit() {
+            this.EditMode = false;
+            localStorage.removeItem(this.items[this.editIndex].item);
+            this.items.splice(this.editIndex, 1);
+            var obj = {
+                complete: false,
+                item: this.EditItem,
+            };
+            localStorage.setItem(obj.item, JSON.stringify(obj));
+            this.items.push(obj);
         },
         Active() {
             this.CreditOn = false;
@@ -119,7 +166,6 @@ export default {
             i.complete = !i.complete;
             localStorage.removeItem(i.item);
             localStorage.setItem(i.item, JSON.stringify(i));
-            console.log(i.complete);
         },
         removeItem(i, index) {
             localStorage.removeItem(i);
@@ -280,7 +326,7 @@ ul.menu li:hover {
 }
 
 .checkbox {
-    float: right;
+    float: left;
     margin-top: 5px;
     user-select: none;
 }
@@ -300,5 +346,36 @@ ul.menu li:hover {
     margin-right: 10px;
     line-height: 30px;
     user-select: none;
+}
+
+.editItem {
+    float: right;
+    line-height: 30px;
+    margin-left: 5px;
+    user-select: none;
+}
+
+.editValue {
+    border: 1px solid rgba(0, 0, 0, 30%);
+    width: 90%;
+}
+
+.Grant {
+    display: block;
+    position: absolute;
+    right: 420px;
+    top: 310px;
+    width: 50px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgb(98, 0, 238);
+    background-color: rgb(98, 0, 238);
+    border-radius: 3px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.width {
+    width: 90%;
 }
 </style>
