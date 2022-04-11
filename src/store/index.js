@@ -25,9 +25,9 @@ export default createStore({
             localStorage.setItem(obj.item, JSON.stringify(obj));
             state.todoItems.push(obj);
         },
-        removeItem(state, todoItem, index) {
-            localStorage.removeItem(todoItem.item);
-            state.todoItems.splice(index, 1);
+        removeItem(state, Paylod) {
+            localStorage.removeItem(Paylod.todoItems.item)
+            state.todoItems.splice(Paylod.index, 1)
         },
     },
 });

@@ -7,15 +7,8 @@
                 <i class="fa-solid fa-xmark" @click="Active"></i>
             </div>
             <div>
-                <p>
-                    홍인성 : 안녕하세요! 해당 프로젝트에 총괄역을 맡고있습니다.
-                    전반적인 시스템과 TodoList부분에 디자인 부분을 맡았습니다.
-                    앞으로 더 많은 프로젝트에 만나뵙겠습니다.
-                </p>
-                <p>
-                    이민준 : 안녕하세요! 해당 프로젝트에서 메뉴와 Credit창에
-                    디자인을 맡았습니다.
-                </p>
+                <p>홍인성 : 안녕하세요! 해당 프로젝트에 총괄역을 맡고있습니다. 전반적인 시스템과 TodoList부분에 디자인 부분을 맡았습니다. 앞으로 더 많은 프로젝트에 만나뵙겠습니다.</p>
+                <p>이민준 : 안녕하세요! 해당 프로젝트에서 메뉴와 Credit창에 디자인을 맡았습니다.</p>
             </div>
         </div>
     </div>
@@ -32,12 +25,7 @@
                 </p>
                 &nbsp;
                 <p class="width">
-                    <input
-                        type="text"
-                        maxlength="30"
-                        class="editValue"
-                        @input="EditItem = $event.target.value"
-                    />
+                    <input type="text" maxlength="30" class="editValue" @input="EditItem = $event.target.value" />
                 </p>
                 <span class="Grant" @click="EditExit"> 적용 </span>
             </div>
@@ -52,29 +40,16 @@
     <main>
         <div>
             <div class="main">
-                <p class="dis">
-                    추가하고 싶은 Todo를 입력해주세요! 엔터키를 누르면
-                    추가됩니다!
-                </p>
+                <p class="dis">추가하고 싶은 Todo를 입력해주세요! 엔터키를 누르면 추가됩니다!</p>
                 <div class="sub">
-                    <input
-                        type="text"
-                        class="addItem"
-                        v-model="newTodoItem"
-                        v-on:keyup.enter="addTodo"
-                        v-on:input="length(newTodoItem)"
-                        maxlength="30"
-                    />
+                    <input type="text" class="addItem" v-model="newTodoItem" v-on:keyup.enter="addTodo" v-on:input="length(newTodoItem)" maxlength="30" />
                     <div class="length">
                         <span :class="color"> {{ newTodoItem.length }}</span>
                         <span class="font"> / 30</span>
                     </div>
                 </div>
                 <transition-group name="items" tag="div" class="items">
-                    <ul
-                        v-for="(todoItems, index) in $store.state.todoItems"
-                        v-bind:key="todoItems"
-                    >
+                    <ul v-for="(todoItems, index) in $store.state.todoItems" v-bind:key="todoItems">
                         <li>
                             <span
                                 v-bind:class="{
@@ -83,10 +58,7 @@
                             >
                                 &nbsp;{{ todoItems.item }}</span
                             >
-                            <i
-                                class="fa-solid fa-pen editItem"
-                                @click="EditModeOn(index)"
-                            ></i>
+                            <i class="fa-solid fa-pen editItem" @click="EditModeOn(index)"></i>
                             <i
                                 class="fa-solid fa-check checkbox"
                                 v-bind:class="{
@@ -94,10 +66,7 @@
                                 }"
                                 @click="checkItem(todoItems)"
                             ></i>
-                            <i
-                                class="fa-solid fa-trash removeItem"
-                                @click="removeItem(todoItems, index)"
-                            ></i>
+                            <i class="fa-solid fa-trash removeItem" @click="removeTodo(todoItems, index)"></i>
                         </li>
                     </ul>
                 </transition-group>
@@ -112,13 +81,13 @@ export default {
         return {
             CreditOn: false,
             EditMode: false,
-            newTodoItem: "",
+            newTodoItem: '',
             todoItems: [],
             items: [],
-            color: "blue",
+            color: 'blue',
             checked: [],
-            editIndex: "",
-            EditItem: "",
+            editIndex: '',
+            EditItem: '',
         };
     },
     methods: {
@@ -146,15 +115,15 @@ export default {
         },
         length(a) {
             if (a.length <= 29) {
-                this.color = "blue";
+                this.color = 'blue';
             } else {
-                this.color = "red";
+                this.color = 'red';
             }
         },
         addTodo() {
-            if (this.newTodoItem !== "") {
-                this.$store.commit("addItem", this.newTodoItem);
-                this.newTodoItem = "";
+            if (this.newTodoItem !== '') {
+                this.$store.commit('addItem', this.newTodoItem);
+                this.newTodoItem = '';
             }
         },
         checkItem(i) {
@@ -162,22 +131,22 @@ export default {
             localStorage.removeItem(i.item);
             localStorage.setItem(i.item, JSON.stringify(i));
         },
-        removeTodo(todoItem, index) {
-            this.$store.commit("removeItem", todoItem, index);
+        removeTodo(todoItems, index) {
+            this.$store.commit('removeItem', { todoItems, index });
         },
     },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
 
 * {
     margin: 0;
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -252,7 +221,7 @@ ul.menu li:hover {
 .dis {
     user-select: none;
     font-size: 15px;
-    font-family: "IBM Plex Sans KR", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     color: rgba(0, 0, 0, 60%);
 }
 
@@ -302,7 +271,7 @@ ul.menu li:hover {
 
 .length {
     user-select: none;
-    font-family: "Dongle", sans-serif;
+    font-family: 'Dongle', sans-serif;
     text-align: left;
 }
 
@@ -357,9 +326,8 @@ ul.menu li:hover {
 
 .Grant {
     display: block;
-    position: absolute;
     right: 420px;
-    top: 310px;
+    top: 280px;
     width: 50px;
     text-align: center;
     color: white;
