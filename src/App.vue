@@ -30,7 +30,10 @@
     <main>
         <div>
             <div class="main">
-                <p class="dis">추가하고 싶은 Todo를 입력해주세요!</p>
+                <p class="dis">
+                    추가하고 싶은 Todo를 입력해주세요! 엔터키를 누르면
+                    추가됩니다!
+                </p>
                 <div class="sub">
                     <input
                         type="text"
@@ -42,7 +45,7 @@
                     />
                     <div class="length">
                         <span :class="color"> {{ newTodoItem.length }}</span>
-                        / 30
+                        <span class="font"> / 30</span>
                     </div>
                 </div>
                 <div class="items">
@@ -50,7 +53,21 @@
                         v-for="(todoItems, index) in items"
                         v-bind:key="todoItems"
                     >
-                        <li>{{ items[index].item }}</li>
+                        <li>
+                            <span
+                                v-bind:class="{
+                                    textComplete: items[index].complete,
+                                }"
+                                >{{ items[index].item }}</span
+                            >
+                            <i
+                                class="fa-solid fa-check checkbox"
+                                v-bind:class="{
+                                    checkCom: items[index].complete,
+                                }"
+                                @click="test(items[index])"
+                            ></i>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -67,6 +84,7 @@ export default {
             todoItems: [],
             items: [],
             color: "blue",
+            checked: [],
         };
     },
     methods: {
@@ -94,6 +112,12 @@ export default {
                 this.color = "red";
             }
         },
+        test(i) {
+            i.complete = !i.complete;
+            localStorage.removeItem(i.item);
+            localStorage.setItem(i.item, JSON.stringify(i));
+            console.log(i.complete);
+        },
     },
     created: function () {
         if (localStorage.length > 0) {
@@ -111,6 +135,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
 
 * {
     margin: 0;
@@ -196,7 +221,7 @@ ul.menu li:hover {
 .sub {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 30%);
-    padding: 5px;
+    user-select: none;
 }
 
 .addItem:focus {
@@ -204,7 +229,10 @@ ul.menu li:hover {
 }
 
 .addItem {
-    width: 100%;
+    width: 90%;
+    height: 30px;
+    margin-left: 10px;
+    user-select: none;
 }
 
 .modal .box .header i {
@@ -225,12 +253,37 @@ ul.menu li:hover {
 
 .length {
     user-select: none;
+    font-family: "Dongle", sans-serif;
+    text-align: left;
 }
+
+.font {
+    font-size: 15px;
+}
+
 .red {
     color: red;
+    margin-left: 10px;
 }
 
 .blue {
     color: blue;
+    margin-left: 10px;
+}
+
+.checkbox {
+    float: right;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.checkCom {
+    color: lightgray;
+}
+
+.textComplete {
+    width: 15%;
+    text-decoration: line-through;
+    color: lightgray;
 }
 </style>
