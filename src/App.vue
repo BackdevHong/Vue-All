@@ -30,28 +30,28 @@
     <main>
         <div>
             <div class="main">
+                <p class="dis">추가하고 싶은 Todo를 입력해주세요!</p>
                 <div class="sub">
-                    <p class="dis">추가하고 싶은 Todo를 입력해주세요!</p>
                     <input
                         type="text"
                         class="addItem"
                         v-model="newTodoItem"
                         v-on:keyup.enter="addItem"
                         v-on:input="length(newTodoItem)"
-                        maxlength="20"
+                        maxlength="30"
                     />
-                    <span :style="{ color: pluscolor }">{{
-                        newTodoItem.length
-                    }}</span>
-                    / 20
-                    <div class="items">
-                        <ul
-                            v-for="(todoItems, index) in items"
-                            v-bind:key="todoItems"
-                        >
-                            <li>{{ items[index].item }}</li>
-                        </ul>
+                    <div class="length">
+                        <span :class="color"> {{ newTodoItem.length }}</span>
+                        / 30
                     </div>
+                </div>
+                <div class="items">
+                    <ul
+                        v-for="(todoItems, index) in items"
+                        v-bind:key="todoItems"
+                    >
+                        <li>{{ items[index].item }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@ export default {
             newTodoItem: "",
             todoItems: [],
             items: [],
-            pluscolor: "",
+            color: "blue",
         };
     },
     methods: {
@@ -88,10 +88,10 @@ export default {
             }
         },
         length(a) {
-            if (a.length <= 20) {
-                this.pluscolor = "black";
+            if (a.length <= 29) {
+                this.color = "blue";
             } else {
-                this.pluscolor = "red";
+                this.color = "red";
             }
         },
     },
@@ -188,18 +188,23 @@ ul.menu li:hover {
 
 .dis {
     user-select: none;
-    font-size: 10px;
+    font-size: 15px;
     font-family: "IBM Plex Sans KR", sans-serif;
     color: rgba(0, 0, 0, 60%);
 }
 
-.addItem {
+.sub {
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 17%);
+    border: 1px solid rgba(0, 0, 0, 30%);
+    padding: 5px;
 }
 
 .addItem:focus {
     outline-style: none;
+}
+
+.addItem {
+    width: 100%;
 }
 
 .modal .box .header i {
@@ -211,9 +216,21 @@ ul.menu li:hover {
     font-size: 20px;
     margin-top: 3px;
     padding: 10px;
+    transition: ease-in;
 }
 
 .items ul hr {
     width: 100%;
+}
+
+.length {
+    user-select: none;
+}
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
 }
 </style>
