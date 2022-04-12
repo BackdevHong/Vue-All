@@ -4,8 +4,9 @@
 
 ## 설명
 
-Vue로 제작한 Todo List 프로젝트입니다.
-현재 오리지널 Vue.js로 제작한 상태이며, ES6 구문과 vueX 구문을 배우면 리펙토링할 예정입니다.
+Vue로 제작한 Todo List 프로젝트입니다. <br>
+현재는 localStroage에 데이터를 저장해 Todo를 띄우는 방식을 채택하고 있습니다.
+나중에 MongoDB 또는 FireBase로 변경하여 수정 기능까지 완성시킬 계획입니다.
 
 ## 데모 사이트
 
