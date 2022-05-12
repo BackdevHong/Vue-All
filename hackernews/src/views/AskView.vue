@@ -1,9 +1,13 @@
 <template>
-	<div>Ask</div>
+    <div>Ask</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+* {
+    margin: 0 auto;
+}
+</style>
