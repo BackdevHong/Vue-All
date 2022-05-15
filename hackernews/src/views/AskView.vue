@@ -1,5 +1,5 @@
 <template>
-    <div>Ask</div>
+	<div>Ask</div>
 </template>
 
 <script>
@@ -8,6 +8,6 @@ export default {};
 
 <style scoped>
 * {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 </style>
