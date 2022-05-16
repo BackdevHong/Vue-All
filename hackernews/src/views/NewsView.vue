@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import { fetchNewsList } from "../api/index";
 
 export default {
 	data() {
@@ -14,16 +14,15 @@ export default {
 		};
 	},
 	created() {
-		var vm = this;
-		axios
-			.get("https://api.hnpwa.com/v0/news/1.json")
-			.then(function (response) {
-				console.log(response);
-				vm.users = response.data;
-			})
-			.catch(function (error) {
-				console.error(error);
-			});
+		this.$store.dispatch("FETCH_NEWS");
+		// fetchNewsList()
+		// 	.then((responce) => {
+		// 		console.log(responce);
+		// 		this.users = responce.data;
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 	});
 	},
 };
 </script>

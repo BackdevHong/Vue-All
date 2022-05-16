@@ -1,9 +1,30 @@
 <template>
-	<div>Jobs</div>
+	<div>
+		<div v-for="user in users">{{ user.title }}</div>
+	</div>
 </template>
 
 <script>
-export default {};
+import { fetchJobsList } from "../api/index";
+
+export default {
+	data() {
+		return {
+			users: [],
+		};
+	},
+	created() {
+		var vm = this;
+		fetchJobsList()
+			.then((responce) => {
+				console.log(responce);
+				vm.users = responce.data;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	},
+};
 </script>
 
 <style></style>
