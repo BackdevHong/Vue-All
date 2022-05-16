@@ -58,4 +58,9 @@ export default {};
 	text-decoration: none;
 	color: black;
 }
+
+.Header a:hover {
+	color: skyblue;
+	transition: all 0.4s;
+}
 </style>
