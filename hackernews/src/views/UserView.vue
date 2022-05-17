@@ -1,12 +1,18 @@
 <template>
 	<div>
-		<p>사용자의 정보를 표시합니다.</p>
-		<p>유저 닉네임 : {{ userInfo.id }}</p>
-		<p>가입한 날 : {{ userInfo.created }}</p>
+		<user-profile :info="userInfo">
+			<template v-slot:username>
+				{{ userInfo.id }}
+			</template>
+			<template v-slot:time>
+				{{ userInfo.created }}
+			</template>
+		</user-profile>
 	</div>
 </template>
 
 <script>
+import UserProfile from "../components/UserProfile.vue";
 export default {
 	computed: {
 		userInfo() {
@@ -17,13 +23,10 @@ export default {
 		const userName = this.$route.params.id;
 		this.$store.dispatch("FETCH_USER", userName);
 	},
+	components: {
+		UserProfile,
+	},
 };
 </script>
 
-<style scoped>
-div > p {
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 20px;
-}
-</style>
+<style scoped></style>

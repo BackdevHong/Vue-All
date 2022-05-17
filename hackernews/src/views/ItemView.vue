@@ -1,5 +1,15 @@
 <template>
 	<div>
+		<user-profile :info="asksInfo">
+			<template v-slot:username>
+				<router-link :to="`/user/${asksInfo.user}`" class="link">{{
+					asksInfo.user
+				}}</router-link>
+			</template>
+			<template v-slot:time>
+				{{ asksInfo.time_ago }}
+			</template>
+		</user-profile>
 		<h2>{{ asksInfo.title }}</h2>
 		<p v-html="asksInfo.content" class="q"></p>
 		<br />
@@ -16,6 +26,7 @@
 </template>
 
 <script>
+import UserProfile from "../components/UserProfile.vue";
 export default {
 	computed: {
 		asksInfo() {
@@ -28,6 +39,9 @@ export default {
 	created() {
 		const id = this.$route.params.id;
 		this.$store.dispatch("FETCH_ASKS", id);
+	},
+	components: {
+		UserProfile,
 	},
 };
 </script>
@@ -50,9 +64,13 @@ export default {
 	padding-bottom: 4px;
 }
 
-.outline {
-	border: 1px solid black;
-	width: 80%;
-	margin: 0 auto;
+.link {
+	text-decoration: none;
+	color: black;
+}
+
+.link:hover {
+	color: pink;
+	transition: 0.4s;
 }
 </style>
