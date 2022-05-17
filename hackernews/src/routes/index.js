@@ -23,7 +23,7 @@ const routes = [
 		component: JobsView,
 	},
 	{
-		path: "/Item",
+		path: "/Item/:id",
 		component: ItemView,
 	},
 	{

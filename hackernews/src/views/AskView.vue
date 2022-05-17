@@ -2,10 +2,15 @@
 	<div>
 		<!-- eslint-disable -->
 		<p v-for="ask in this.$store.state.ask">
-			<a v-bind:href="ask.url">
+			<router-link :to="`/item/${ask.id}`">
 				{{ ask.title }}
-			</a>
-			<small>{{ ask.time_ago }} by {{ ask.user }} </small>
+			</router-link>
+			<small
+				>{{ ask.time_ago }} by
+				<router-link :to="`/user/${ask.user}`">{{
+					ask.user
+				}}</router-link></small
+			>
 		</p>
 	</div>
 </template>
@@ -48,6 +53,20 @@ div > p > a:after {
 }
 
 div > p > a:hover {
+	color: pink;
+	transition: all 0.4s;
+}
+
+div > p > small > a {
+	text-decoration: none;
+	color: black;
+}
+
+div > p > small > a:after {
+	color: black;
+}
+
+div > p > small > a:hover {
 	color: pink;
 	transition: all 0.4s;
 }

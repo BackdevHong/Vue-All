@@ -7,6 +7,8 @@ export default createStore({
 		news: [],
 		jobs: [],
 		ask: [],
+		user: [],
+		asks: [],
 	},
 	getters: {
 		fetchedAsk(state) {
