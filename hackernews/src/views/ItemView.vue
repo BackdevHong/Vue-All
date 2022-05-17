@@ -1,9 +1,10 @@
 <template>
 	<div>
-		<p>{{ asksInfo.title }}</p>
+		<h2>{{ asksInfo.title }}</h2>
 		<p v-html="asksInfo.content" class="q"></p>
+		<br />
 		답변 ( {{ asksInfo.comments_count }}개 )
-		<div>
+		<div class="outline">
 			<p
 				v-for="comments in asksInfo.comments"
 				:key="comments"
@@ -32,16 +33,26 @@ export default {
 </script>
 
 <style scoped>
+.q,
+.a {
+	width: 90%;
+	margin: 0 auto;
+	word-break: break-all;
+}
 .q {
 	border: 1px solid black;
 	border-radius: 5px;
 }
 
 .a {
-	width: 90%;
 	border-bottom: 1px solid black;
 	padding: 5px 5px 5px 5px;
 	padding-bottom: 4px;
+}
+
+.outline {
+	border: 1px solid black;
+	width: 80%;
 	margin: 0 auto;
 }
 </style>
