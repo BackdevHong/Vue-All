@@ -13,7 +13,7 @@
 		<h2>{{ asksInfo.title }}</h2>
 		<p v-html="asksInfo.content" class="q"></p>
 		<br />
-		답변 ( {{ asksInfo.comments_count }}개 )
+		답변 ( {{ asksInfo.comments.length }}개 )
 		<div class="outline">
 			<p
 				v-for="comments in asksInfo.comments"
