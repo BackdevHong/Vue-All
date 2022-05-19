@@ -48,17 +48,6 @@
 // import { fetchNewsList } from "../api/index";
 
 export default {
-	created() {
-		// this.$store.dispatch("FETCH_NEWS");
-		const name = this.$route.name;
-		if (name === "news") {
-			this.$store.dispatch("FETCH_NEWS");
-		} else if (name === "ask") {
-			this.$store.dispatch("FETCH_ASK");
-		} else if (name === "jobs") {
-			this.$store.dispatch("FETCH_JOBS");
-		}
-	},
 	computed: {
 		listItems() {
 			const name = this.$route.name;
@@ -69,7 +58,7 @@ export default {
 			} else if (name === "jobs") {
 				return this.$store.state.jobs;
 			}
-			return "";
+			return 0;
 		},
 	},
 };

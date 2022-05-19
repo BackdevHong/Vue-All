@@ -7,7 +7,6 @@ const config = {
 
 // 2. API 함수들을 정리
 function fetchNewsList() {
-	// return axios.get(config.baseUrl + "news/1.json"); //ES5
 	return axios.get(`${config.baseUrl}news/1.json`); // ES6
 }
 
@@ -27,10 +26,20 @@ function fetchAskInfo(userID) {
 	return axios.get(`${config.baseUrl}item/${userID}.json`);
 }
 
+function fetchList(pageName) {
+	return axios.get(`${config.baseUrl}${pageName}/1.json`);
+}
+
+function setSpinner(Boolean) {
+	return Boolean;
+}
+
 export {
 	fetchNewsList,
 	fetchJobsList,
 	fetchAskList,
 	fetchUserInfo,
 	fetchAskInfo,
+	fetchList,
+	setSpinner,
 };

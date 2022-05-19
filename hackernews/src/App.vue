@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		<spinner :loading="loadingStatus"></spinner>
 		<tool-bar></tool-bar>
 		<router-view v-slot="{ Component }">
 			<transition name="page" mode="out-in">
@@ -11,10 +12,28 @@
 
 <script>
 import ToolBar from "./components/ToolBar";
+import Spinner from "./components/Spinner.vue";
 
 export default {
 	components: {
 		ToolBar,
+		Spinner,
+	},
+	data() {
+		return {
+			loadingStatus: false,
+		};
+	},
+	methods: {
+		startSpinner() {
+			this.loadingStatus = true;
+		},
+		endSpinner() {
+			this.loadingStatus = false;
+		},
+	},
+	created() {
+		this.emitter.on("start:spinner", () => console.log("test"));
 	},
 };
 </script>

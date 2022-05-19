@@ -9,6 +9,7 @@ export default createStore({
 		ask: [],
 		user: {},
 		asks: {},
+		list: [],
 	},
 	getters: {
 		fetchedAsk(state) {
