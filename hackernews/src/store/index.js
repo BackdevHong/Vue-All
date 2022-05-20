@@ -10,6 +10,7 @@ export default createStore({
 		user: {},
 		asks: {},
 		list: [],
+		spin: true,
 	},
 	getters: {
 		fetchedAsk(state) {

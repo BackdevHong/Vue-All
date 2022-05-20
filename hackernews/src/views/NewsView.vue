@@ -8,9 +8,6 @@ export default {
 	components: {
 		ListItem,
 	},
-	created() {
-		this.emitter.emit("start:spinner");
-	},
 };
 </script>
 

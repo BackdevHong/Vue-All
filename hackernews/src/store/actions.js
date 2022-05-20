@@ -64,4 +64,8 @@ export default {
 			.then(({ data }) => commit("SET_LIST", data))
 			.catch((error) => console.log(error));
 	},
+
+	FETCH_SPIN({ commit }, status) {
+		commit("SET_SPIN", status);
+	},
 };

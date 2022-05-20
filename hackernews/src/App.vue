@@ -21,19 +21,12 @@ export default {
 	},
 	data() {
 		return {
-			loadingStatus: false,
+			loadingStatus: this.$store.state.spinner,
 		};
 	},
-	methods: {
-		startSpinner() {
-			this.loadingStatus = true;
-		},
-		endSpinner() {
-			this.loadingStatus = false;
-		},
-	},
 	created() {
-		this.emitter.on("start:spinner", () => console.log("test"));
+		this.$store.dispatch("FETCH_SPIN", true);
+		console.log("test complete");
 	},
 };
 </script>
