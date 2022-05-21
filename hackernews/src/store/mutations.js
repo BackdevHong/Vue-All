@@ -19,6 +19,5 @@ export default {
     },
     SET_SPIN(state, spin) {
         state.spin = spin;
-        console.log(spin);
     },
 };

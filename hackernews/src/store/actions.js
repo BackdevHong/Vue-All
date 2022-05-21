@@ -67,6 +67,5 @@ export default {
 
     FETCH_SPIN({ commit }, status) {
         commit("SET_SPIN", status);
-        console.log(status);
     },
 };
