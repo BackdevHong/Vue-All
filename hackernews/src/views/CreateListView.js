@@ -3,24 +3,28 @@ import ListView from "./ListView.vue";
 import { h } from "vue";
 
 export default function createListView(name) {
-	return {
-		name: name,
-		created() {
-			// setTimeout(() => {
-			this.$store
-				.dispatch("FETCH_LIST", this.$route.name)
-				.then(() => {
-					// this.$store.state.spinner = false;
-					console.log("fetched");
-				})
-				.catch((error) => {
-					// this.$store.state.spinner = true;
-					console.log(error);
-				});
-			// }, 3000);
-		},
-		render() {
-			return h(ListView);
-		},
-	};
+    return {
+        name,
+        created() {
+            this.$store.dispatch('FETCH_SPIN', true);
+            setTimeout(() => {
+                this.$store
+                    .dispatch("FETCH_LIST", this.$route.name)
+                    .then(() => {
+                        this.$store.dispatch('FETCH_SPIN', false);
+                        console.log("fetched");
+                        console.log(this.$store.state.spin);
+                    })
+                    .catch((error) => {
+                        this.$store.dispatch('FETCH_SPIN', true);
+                        console.log(error);
+                        console.log(this.$store.state.spin);
+
+                    });
+            }, 3000);
+        },
+        render() {
+            return h(ListView);
+        },
+    };
 }

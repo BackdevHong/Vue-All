@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <spinner :loading="loadingStatus"></spinner>
+        <spinner :loading="this.$store.state.spin"></spinner>
         <tool-bar></tool-bar>
         <router-view v-slot="{ Component }">
             <transition name="page" mode="out-in">
@@ -18,15 +18,6 @@ export default {
     components: {
         ToolBar,
         Spinner,
-    },
-    data() {
-        return {
-            loadingStatus: this.$store.state.spin,
-        };
-    },
-    created() {
-        this.$store.dispatch('FETCH_SPIN', true);
-        console.log('test complete');
     },
 };
 </script>
