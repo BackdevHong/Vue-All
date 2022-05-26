@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<input type="checkbox" :value="value" @change="toggleCheckBox" />
+		<input type="checkbox" :checked="value" @change="toggleCheckBox" />
 	</div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<check-box v-model="checked"></check-box>
+	<check-box :checked="checked"></check-box>
 </template>
 
 <script>

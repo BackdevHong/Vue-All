@@ -6,7 +6,7 @@ export default {
 	data() {
 		return {
 			response: null,
-			loading: false,
+			loading: true,
 		};
 	},
 	created() {
@@ -14,7 +14,7 @@ export default {
 			.get(this.url)
 			.then((response) => {
 				this.response = response.data;
-				this.loading = true;
+				this.loading = false;
 			})
 			.catch((error) => {
 				alert("[Error] fetching the data", error);
