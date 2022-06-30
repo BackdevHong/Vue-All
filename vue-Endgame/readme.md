@@ -52,3 +52,5 @@ BE Developer에게서 API가 나오면, 그 API를 화면에 뿌려준다.
 ### 8. QA
 
 Quality Assurance(QA), 이 과정을 통해 퀄리티를 높인다.
+
+**Tester**
