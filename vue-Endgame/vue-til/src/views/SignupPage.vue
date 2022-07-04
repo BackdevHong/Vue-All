@@ -1,9 +1,9 @@
 <template>
-	<div></div>
+	<div>signup</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
