@@ -1,19 +1,33 @@
 <template>
-	<div class="L-Form">
-		<form @submit.prevent="submitForm">
-			<div>
-				<label for="username">id:</label><br />
-				<input type="text" id="username" v-model="username" />
-			</div>
-			<div>
-				<label for="password">pw:</label>
-				<input type="text" id="password" v-model="password" />
-			</div>
-			<button type="submit" :disabled="!isUsernameValid || !password">
-				로그인
-			</button>
-			<p>{{ logMessage }}</p>
-		</form>
+	<div class="contents">
+		<div class="form-wrapper form-wrapper-sm">
+			<form @submit.prevent="submitForm" class="form">
+				<div>
+					<label for="username">id:</label>
+					<input type="text" id="username" v-model="username" />
+					<p class="validation-text">
+						<span
+							class="warning"
+							v-if="!isUsernameValid && username"
+						>
+							이메일을 입력해주세요!
+						</span>
+					</p>
+				</div>
+				<div>
+					<label for="password">pw:</label>
+					<input type="text" id="password" v-model="password" />
+				</div>
+				<button
+					type="submit"
+					:disabled="!isUsernameValid || !password"
+					class="btn"
+				>
+					로그인
+				</button>
+				<p>{{ logMessage }}</p>
+			</form>
+		</div>
 	</div>
 </template>
 
@@ -57,13 +71,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.L-Form {
-	width: 200px;
-	padding: 30px;
-	background-color: white;
-	height: 80px;
-	align-items: center;
-	margin: 0 auto;
-}
-</style>
+<style lang="scss" scoped></style>

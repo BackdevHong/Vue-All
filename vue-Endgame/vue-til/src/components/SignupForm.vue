@@ -1,40 +1,38 @@
 <template>
-	<form @submit.prevent="submitForm">
-		<div>
-			<label for="username">아이디: </label>
-			<input type="text" id="username" v-model="username" />
+	<div class="contents">
+		<div class="form-wrapper form-wrapper-sm">
+			<form @submit.prevent="submitForm" class="form">
+				<div>
+					<label for="username">아이디: </label>
+					<input type="text" id="username" v-model="username" />
+					<p class="validation-text">
+						<span
+							class="warning"
+							v-if="!isUsernameValid && username"
+						>
+							이메일을 입력해주세요!
+						</span>
+					</p>
+				</div>
+				<div>
+					<label for="password">비밀번호: </label>
+					<input type="text" id="password" v-model="password" />
+				</div>
+				<div>
+					<label for="nickname">닉네임: </label>
+					<input type="text" id="nickname" v-model="nickname" />
+				</div>
+				<button
+					type="submit"
+					:disabled="!isUsernameValid || !password || !nickname"
+					class="btn"
+				>
+					회원 가입
+				</button>
+				<p>{{ logMessage }}</p>
+			</form>
 		</div>
-		<div>
-			<label for="password">비밀번호: </label>
-			<input type="text" id="password" v-model="password" />
-		</div>
-		<div>
-			<label for="nickname">닉네임: </label>
-			<input type="text" id="nickname" v-model="nickname" />
-		</div>
-		<button
-			type="submit"
-			:disabled="!isUsernameValid || !password || !nickname"
-		>
-			회원 가입
-		</button>
-		<div v-if="!username" class="noEmail">
-			아이디를 입력하지 않으셨습니다.
-		</div>
-		<div v-else-if="!isUsernameValid" class="noEmail">
-			아이디가 이메일 형식에 맞지 않습니다.
-		</div>
-		<div v-else></div>
-		<div v-if="!password" class="noEmail">
-			비밀번호를 입력하지 않으셨습니다.
-		</div>
-		<div v-else></div>
-		<div v-if="!nickname" class="noEmail">
-			닉네임을 입력하지 않으셨습니다.
-		</div>
-		<div v-else></div>
-		<p>{{ logMessage }}</p>
-	</form>
+	</div>
 </template>
 
 <script>
