@@ -7,5 +7,11 @@ module.exports = defineConfig({
         client: {
             overlay: false,
         },
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['postcss-loader']
+            }
+        ]
     },
 });

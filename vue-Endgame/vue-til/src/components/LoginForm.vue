@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div class="L-Form">
 		<form @submit.prevent="submitForm">
 			<div>
-				<label for="username">id:</label>
+				<label for="username">id:</label><br />
 				<input type="text" id="username" v-model="username" />
 			</div>
 			<div>
@@ -57,4 +57,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.L-Form {
+	width: 200px;
+	padding: 30px;
+	background-color: white;
+	height: 80px;
+	align-items: center;
+	margin: 0 auto;
+}
+</style>
