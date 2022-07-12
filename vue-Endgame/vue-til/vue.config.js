@@ -1,17 +1,11 @@
 /* eslint-disable */
 
-const { defineConfig } = require('@vue/cli-service');
+const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-    transpileDependencies: true,
-    devServer: {
-        client: {
-            overlay: false,
-        },
-        rules: [
-            {
-                test: /\.css$/,
-                use: ['postcss-loader']
-            }
-        ]
-    },
+	transpileDependencies: true,
+	devServer: {
+		client: {
+			overlay: false,
+		},
+	},
 });
